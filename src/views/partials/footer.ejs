@@ -1,0 +1,126 @@
+<!-- ═════════════ BENEFICIOS ═════════════ -->
+<section class="beneficios <%= locals.tiraSimple ? 'beneficios--simple' : '' %>" aria-label="Beneficios">
+  <div class="contenedor beneficios__grilla">
+    <div class="beneficio">
+      <svg viewBox="0 0 32 32" width="34" height="34" aria-hidden="true"><path d="M3 9h15v12H3zM18 13h5l4 4v4h-9" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round"/><circle cx="9" cy="23" r="2.3" fill="var(--rosa-suave)" stroke="currentColor" stroke-width="1.4"/><circle cx="23" cy="23" r="2.3" fill="var(--rosa-suave)" stroke="currentColor" stroke-width="1.4"/></svg>
+      <div>
+        <h3>Envíos a todo el país</h3>
+        <p>Rápidos y seguros</p>
+      </div>
+    </div>
+    <div class="beneficio">
+      <svg viewBox="0 0 32 32" width="34" height="34" aria-hidden="true"><rect x="3.5" y="7" width="25" height="18" rx="2.5" fill="none" stroke="currentColor" stroke-width="1.4"/><path d="M3.5 13h25M8 20h7" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>
+      <div>
+        <h3>Medios de pago</h3>
+        <p>Tarjetas, transferencias y más</p>
+      </div>
+    </div>
+    <div class="beneficio">
+      <svg viewBox="0 0 32 32" width="34" height="34" aria-hidden="true"><path d="M16 4l10 4v8c0 6-4.3 10.5-10 12-5.7-1.5-10-6-10-12V8l10-4z" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round"/><path d="M11.5 16l3.2 3.2 6-6.4" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      <div>
+        <h3>Compra protegida</h3>
+        <p>Tus datos siempre seguros</p>
+      </div>
+    </div>
+    <div class="beneficio">
+      <svg viewBox="0 0 32 32" width="34" height="34" aria-hidden="true"><path d="M16 27s-11-6.8-11-15a6.2 6.2 0 0111-3.9A6.2 6.2 0 0127 12c0 8.200-11 15-11 15z" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round"/></svg>
+      <div>
+        <h3>Atención personalizada</h3>
+        <p>Estamos para ayudarte</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═════════════ FOOTER ═════════════ -->
+<% const t = locals.tienda || {}; %>
+<footer class="footer">
+  <div class="contenedor footer__grilla">
+    <div class="footer__marca">
+      <%- include('logo', { variante: 'apilado', clase: 'logo-svg--footer' }) %>
+      <p>Prendas y accesorios para acompañarte todos los días. Enviamos a todo el país.</p>
+      <% if (t.instagram || t.facebook || t.tiktok) { %>
+        <div class="footer__redes">
+          <% if (t.instagram) { %><a href="<%= t.instagram %>" target="_blank" rel="noopener">Instagram</a><% } %>
+          <% if (t.facebook) { %><a href="<%= t.facebook %>" target="_blank" rel="noopener">Facebook</a><% } %>
+          <% if (t.tiktok) { %><a href="<%= t.tiktok %>" target="_blank" rel="noopener">TikTok</a><% } %>
+        </div>
+      <% } %>
+    </div>
+    <div>
+      <h4>Tienda</h4>
+      <ul>
+        <li><a href="/tienda">Toda la colección</a></li>
+        <li><a href="/novedades">Novedades</a></li>
+        <% (locals.categoriasMenu || []).forEach(cat => { %>
+          <li><a href="<%= cat.url %>"><%= cat.nombre %></a></li>
+        <% }) %>
+        <li><a href="/ofertas">Ofertas</a></li>
+      </ul>
+    </div>
+    <div>
+      <h4>Ayuda</h4>
+      <ul>
+        <li><a href="/terminos#envios">Envíos</a></li>
+        <li><a href="/terminos#pagos">Medios de pago</a></li>
+        <li><a href="/cambios-y-devoluciones">Cambios y devoluciones</a></li>
+        <% if (t.whatsapp) { %>
+          <li><a href="<%= t.whatsapp %>" target="_blank" rel="noopener">Contacto por WhatsApp</a></li>
+        <% } else if (t.email) { %>
+          <li><a href="mailto:<%= t.email %>">Contacto</a></li>
+        <% } %>
+      </ul>
+    </div>
+    <div>
+      <h4>Legales</h4>
+      <ul>
+        <li><a href="/terminos">Términos y condiciones</a></li>
+        <li><a href="/privacidad">Política de privacidad</a></li>
+        <li><a href="/cookies">Política de cookies</a></li>
+        <li><a href="/arrepentimiento" class="footer__arrepentimiento">Botón de arrepentimiento</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="contenedor footer__legal">
+    <span>
+      © <%= new Date().getFullYear() %> <%= t.nombre || 'Akualoe Chic' %>.
+      <% if (t.razonSocial) { %><%= t.razonSocial %><% if (t.cuit) { %> · CUIT <%= t.cuit %><% } %>.<% } %>
+      Todos los derechos reservados.
+    </span>
+    <span class="footer__oficiales">
+      <a href="https://www.argentina.gob.ar/produccion/defensadelconsumidor/formulario" target="_blank" rel="noopener">Defensa de las y los consumidores. Para reclamos ingrese aquí</a>
+      <% if (t.dataFiscal) { %>
+        <a href="<%= t.dataFiscal %>" target="_blank" rel="noopener">Data fiscal</a>
+      <% } %>
+    </span>
+    <span class="footer__pagos">Visa · Mastercard · Amex · Naranja · Mercado Pago · Transferencia</span>
+  </div>
+</footer>
+
+<% if (t.whatsapp) { %>
+<!-- Botón flotante de WhatsApp -->
+<a href="<%= t.whatsapp %>" class="whatsapp" aria-label="Escribinos por WhatsApp" target="_blank" rel="noopener">
+  <svg viewBox="0 0 24 24" width="24" height="24"><path d="M12 3a9 9 0 00-7.8 13.5L3 21l4.6-1.2A9 9 0 1012 3z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><path d="M9 8.5c0 3.5 3 6.5 6.5 6.5l1-1.5-2-1-1 .8c-1-.4-2-1.4-2.3-2.3l.8-1-1-2L9.5 8z" fill="currentColor"/></svg>
+</a>
+<% } %>
+
+<!-- Aviso de cookies (solo usamos las necesarias: se muestra una vez) -->
+<div class="aviso-cookies" id="avisoCookies" role="region" aria-label="Aviso de cookies" hidden>
+  <p>
+    Usamos solo las cookies necesarias para que la tienda funcione (tu sesión y tu carrito). No usamos cookies de publicidad.
+    <a href="/cookies">Más información</a>
+  </p>
+  <button type="button" class="btn btn--solido btn--chico" id="aceptarCookies">Entendido</button>
+</div>
+
+<!-- Aviso al agregar al carrito -->
+<div class="toast" id="toast" role="status"></div>
+
+<% if (locals.flash) { %>
+  <div id="flash" data-mensaje="<%= flash %>" hidden></div>
+<% } %>
+
+<script src="/js/base.js"></script>
+<% if (esAdmin(locals.usuarioLocal)) { %>
+  <%- include('notificaciones-avisos') %>
+<% } %>

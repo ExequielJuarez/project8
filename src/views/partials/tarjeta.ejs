@@ -1,0 +1,45 @@
+<article class="tarjeta"
+         data-id="<%= p.id %>"
+         data-nombre="<%= p.nombre %>"
+         data-categoria="<%= p.categoria %>"
+         data-sub="<%= p.subcategoriaSlug || '' %>"
+         data-colores="<%= (p.colores || []).map(c => c.valor).join(' ') %>"
+         data-talles="<%= (p.talles || []).join(',') %>"
+         data-precio="<%= p.precio %>"
+         data-orden="<%= typeof i !== 'undefined' ? i : 0 %>"<%= locals.oculta ? ' hidden' : '' %>>
+  <div class="tarjeta__media">
+    <a href="/producto/<%= p.id %>" class="tarjeta__imagen">
+      <% if (p.stock <= 0) { %>
+        <span class="tarjeta__etiqueta tarjeta__etiqueta--agotado">Sin stock</span>
+      <% } else if (p.etiqueta) { %>
+        <span class="tarjeta__etiqueta"><%= p.etiqueta %></span>
+      <% } %>
+      <% if (p.imagen) { %>
+        <img class="tarjeta__foto" src="<%= p.imagen %>" alt="<%= p.nombre %>" loading="lazy">
+      <% } else { %>
+        <span class="placeholder">
+          <span class="placeholder__texto">(IMAGEN)</span>
+        </span>
+      <% } %>
+      <%# Al pasar el mouse se ve la segunda foto (si el producto tiene) %>
+      <% const segunda = (p.imagenes || [])[1]; %>
+      <% if (p.imagen && segunda) { %>
+        <img class="tarjeta__foto tarjeta__foto--alt" src="<%= segunda.ruta %>" alt="" aria-hidden="true" loading="lazy">
+      <% } %>
+    </a>
+    <% const esFav = (locals.favoritosIds || []).includes(p.id); %>
+    <button class="tarjeta__fav <%= esFav ? 'activo' : '' %>" data-fav-id="<%= p.id %>" aria-pressed="<%= esFav %>" aria-label="<%= esFav ? 'Quitar de favoritos' : 'Agregar a favoritos' %>">
+      <svg viewBox="0 0 24 24" width="18" height="18"><path d="M12 20s-7-4.4-7-10a4 4 0 017-2.6A4 4 0 0119 10c0 5.6-7 10-7 10z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg>
+    </button>
+  </div>
+
+  <div class="tarjeta__info">
+    <h3 class="tarjeta__nombre"><a href="/producto/<%= p.id %>"><%= p.nombre %></a></h3>
+    <p class="tarjeta__precio"><%= formatoPrecio(p.precio) %></p>
+  </div>
+  <% if (p.stock > 0) { %>
+    <button class="tarjeta__agregar" data-agregar>Agregar al carrito</button>
+  <% } else { %>
+    <span class="tarjeta__agregar tarjeta__agregar--agotado">Sin stock</span>
+  <% } %>
+</article>

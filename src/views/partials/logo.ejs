@@ -1,0 +1,12 @@
+<%
+  // Logo de Akualoe Chic en vector (se ve nítido en cualquier tamaño).
+  // Toma el color del texto que lo rodea (currentColor): ciruela sobre fondo
+  // rosa, rosa claro sobre fondo oscuro.
+  //   variante: "horizontal" (encabezado) o "apilado" (pie de página)
+  const variante = locals.variante || "horizontal";
+  const clase = locals.clase || "";
+%>
+<svg class="logo-svg logo-svg--<%= variante %> <%= clase %>" viewBox="0 0 270 78" role="img" aria-label="Akualoe Chic">
+  <text x="135" y="46" text-anchor="middle" font-size="52" textLength="262" lengthAdjust="spacing" class="logo-svg__marca">AKUALOE</text>
+  <text x="140" y="70" text-anchor="middle" font-size="12" class="logo-svg__bajada">CHIC</text>
+</svg>

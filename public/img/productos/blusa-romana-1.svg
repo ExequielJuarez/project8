@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 800" role="img">
+  <defs>
+    <linearGradient id="fondo" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#efe0d6"/><stop offset="1" stop-color="#dcc3b4"/></linearGradient>
+    <linearGradient id="tela-f6f1ec" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#f8f4f0"/><stop offset=".55" stop-color="#f6f1ec"/><stop offset="1" stop-color="#cac6c2"/></linearGradient>
+    <linearGradient id="luz" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#fff" stop-opacity="0.55"/><stop offset="1" stop-color="#fff" stop-opacity="0"/></linearGradient>
+    <filter id="sombra" x="-20%" y="-20%" width="140%" height="150%"><feDropShadow dx="0" dy="18" stdDeviation="14" flood-color="#2b1a20" flood-opacity="0.28"/></filter>
+  </defs>
+  <rect width="800" height="800" fill="url(#fondo)"/>
+  <polygon points="470,0 700,0 330,800 100,800" fill="url(#luz)"/>
+  <polygon points="650,0 760,0 540,800 430,800" fill="url(#luz)" opacity=".6"/>
+  <g filter="url(#sombra)"><g transform="translate(400 430) scale(1.12) translate(-400 -430)"><g fill="none" stroke="#b9a597" stroke-width="4" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M400 128 V108 a15 15 0 1 1 15 15"/>
+    <path d="M400 128 L252 192 Q240 198 254 198 L546 198 Q560 198 548 192 Z"/>
+  </g>
+      <path d="M295 215 C225 203 170 255 186 337 Q190 354 215 358 Q252 364 288 346 L289 300 Z" fill="url(#tela-f6f1ec)" /><path d="M505 215 C575 203 630 255 614 337 Q610 354 585 358 Q548 364 512 346 L511 300 Z" fill="url(#tela-f6f1ec)" /><path d="M335 190 L372 190 L400 260 L428 190 L465 190 Q495 196 505 215 L512 300 Q520 420 528 520 Q534 590 540 642 Q400 672 260 642 Q266 590 272 520 Q280 420 288 300 L295 215 Q305 196 335 190 Z" fill="url(#tela-f6f1ec)" />
+      <path d="M295 215 C255 235 215 290 214 352" fill="none" stroke="#a7a4a0" stroke-opacity=".25" stroke-width="2"/>
+      <path d="M505 215 C545 235 585 290 586 352" fill="none" stroke="#a7a4a0" stroke-opacity=".25" stroke-width="2"/>
+      <path d="M198 340 Q245 368 289 346 M602 340 Q555 368 511 346" fill="none" stroke="#a7a4a0" stroke-opacity=".45" stroke-width="5" stroke-linecap="round"/>
+      <path d="M335 190 L400 262 L465 190" fill="none" stroke="#cac6c2" stroke-width="7" stroke-linejoin="round"/>
+      <path d="M400 262 V650" stroke="#a7a4a0" stroke-opacity=".3" stroke-width="2"/>
+      <circle cx="400" cy="310" r="5" fill="#f8f4f0" stroke="#a7a4a0" stroke-opacity=".5"/><circle cx="400" cy="372" r="5" fill="#f8f4f0" stroke="#a7a4a0" stroke-opacity=".5"/><circle cx="400" cy="434" r="5" fill="#f8f4f0" stroke="#a7a4a0" stroke-opacity=".5"/><circle cx="400" cy="496" r="5" fill="#f8f4f0" stroke="#a7a4a0" stroke-opacity=".5"/><circle cx="400" cy="558" r="5" fill="#f8f4f0" stroke="#a7a4a0" stroke-opacity=".5"/><circle cx="400" cy="620" r="5" fill="#f8f4f0" stroke="#a7a4a0" stroke-opacity=".5"/>
+      <path d="M300 330 Q330 470 318 640" fill="none" stroke="#fff" stroke-opacity=".12" stroke-width="22" stroke-linecap="round"/>
+      <path d="M262 642 Q400 672 538 642" fill="none" stroke="#a7a4a0" stroke-opacity=".3" stroke-width="3"/></g></g>
+</svg>

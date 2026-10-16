@@ -1,0 +1,81 @@
+<%- include('partials/head') %>
+<%- include('partials/header') %>
+
+<%
+  // Todo el contenido se edita desde Admin → Inicio (ver src/data/inicioEditable.js).
+  // textoRico() escapa el texto y convierte *palabra* en cursiva.
+  const c = contenido;
+  const plano = (t) => String(t || "").replace(/\*/g, "");
+  const productosDestacados = locals.destacados || [];
+%>
+
+<main class="inicio">
+
+  <!-- ═════════════ PORTADA ═════════════ -->
+  <section class="portada" data-seccion="portada">
+    <img class="portada__foto" src="<%= c.portada.imagen %>" alt="" width="1200" height="1000" fetchpriority="high">
+    <div class="contenedor portada__grilla">
+      <div class="portada__texto">
+        <% if (c.portada.etiqueta) { %>
+          <p class="portada__etiqueta"><%- textoRico(c.portada.etiqueta) %></p>
+        <% } %>
+        <h1 class="portada__titulo" aria-label="<%= plano(c.portada.titulo).replace(/\n/g, ' ') %>">
+          <% c.portada.titulo.split("\n").forEach((renglon) => { %>
+            <span class="portada__renglon"><span><%- textoRico(renglon) %></span></span>
+          <% }) %>
+        </h1>
+        <span class="portada__linea" aria-hidden="true"></span>
+        <% if (c.portada.bajada) { %><p class="portada__bajada"><%- textoRico(c.portada.bajada) %></p><% } %>
+        <div class="portada__acciones">
+          <% if (c.portada.botonTexto) { %>
+            <a href="<%= c.portada.botonLink || urlProductos %>" class="portada__boton"><%= c.portada.botonTexto %> <span aria-hidden="true">→</span></a>
+          <% } %>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═════════════ COLECCIONES ═════════════ -->
+  <% if (c.colecciones.visible) { %>
+    <section class="colecciones contenedor" id="nuestras-colecciones" data-seccion="colecciones">
+      <ul class="colecciones__lista">
+        <% c.colecciones.items.filter((col) => col.nombre).forEach((col) => { %>
+          <li class="coleccion">
+            <a href="<%= col.link || urlProductos %>" class="coleccion__link">
+              <img src="<%= col.imagen %>" alt="" width="400" height="350" loading="lazy">
+              <span class="coleccion__info">
+                <span class="coleccion__nombre"><%= col.nombre %></span>
+                <span class="coleccion__ver">Ver más <span aria-hidden="true">→</span></span>
+              </span>
+            </a>
+          </li>
+        <% }) %>
+      </ul>
+    </section>
+  <% } %>
+
+  <!-- ═════════════ MÁS ELEGIDOS ═════════════ -->
+  <% if (c.masElegidos.visible && productosDestacados.length) { %>
+    <section class="elegidos contenedor" data-seccion="masElegidos">
+      <div class="elegidos__cabecera">
+        <div>
+          <% if (c.masElegidos.etiqueta) { %><p class="elegidos__etiqueta"><%= c.masElegidos.etiqueta %></p><% } %>
+          <h2 class="elegidos__titulo"><%= c.masElegidos.titulo %></h2>
+        </div>
+        <% if (c.masElegidos.linkTexto) { %>
+          <a href="<%= c.masElegidos.link || urlProductos %>" class="elegidos__ver"><%= c.masElegidos.linkTexto %> <span aria-hidden="true">→</span></a>
+        <% } %>
+      </div>
+      <div class="elegidos__grilla">
+        <% productosDestacados.forEach((p, i) => { %>
+          <%- include('partials/tarjeta', { p, i }) %>
+        <% }) %>
+      </div>
+    </section>
+  <% } %>
+
+</main>
+
+<%- include('partials/footer') %>
+</body>
+</html>

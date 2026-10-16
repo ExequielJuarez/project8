@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title><%= titulo %> | Akualoe Chic</title>
+  <link rel="icon" href="/img/favicon.svg" type="image/svg+xml">
+
+  <link rel="preload" href="/fonts/playfair-display-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="/fonts/jost-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="/css/fuentes.css">
+  <link rel="stylesheet" href="/css/base.css">
+  <%# estilo puede ser un nombre o una lista: "login" o ["acceso", "login"] %>
+  <% if (esAdmin(locals.usuarioLocal)) { %>
+    <link rel="stylesheet" href="/css/notificaciones.css">
+  <% } %>
+  <% [].concat(locals.estilo || []).forEach(hoja => { %>
+    <link rel="stylesheet" href="/css/<%= hoja %>.css">
+  <% }) %>
+</head>
+<body>

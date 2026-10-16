@@ -1,0 +1,330 @@
+/* ==========================================================
+   INICIO — Estilos propios de la vista (usa base.css)
+   Mobile first · Tablet ≥ 768px · PC ≥ 1100px
+   ========================================================== */
+
+/* ==========================================================
+   PORTADA
+   ========================================================== */
+.portada {
+  position: relative;
+  overflow: hidden;
+  background: linear-gradient(100deg, #f7e1e0 0%, #f0cfcd 55%, #e8bfbd 100%);
+}
+
+/* La foto ocupa toda la portada y se funde con el color del lado del texto */
+.portada__foto {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: 70% 40%;
+}
+
+.portada::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(90deg, rgba(248, 228, 226, 0.97) 0%, rgba(248, 228, 226, 0.88) 42%, rgba(248, 228, 226, 0) 72%);
+  pointer-events: none;
+}
+
+.portada__grilla {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  min-height: 420px;
+  padding-top: 40px;
+  padding-bottom: 40px;
+}
+
+.portada__texto {
+  max-width: 520px;
+}
+
+.portada__etiqueta {
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--acento);
+  animation: entrar 0.7s both;
+}
+
+.portada__titulo {
+  margin-top: 16px;
+  font-family: var(--fuente-titulos);
+  font-size: clamp(40px, 9vw, 68px);
+  font-weight: 400;
+  line-height: 1.04;
+  letter-spacing: 0.005em;
+  text-transform: uppercase;
+}
+
+.portada__renglon {
+  display: block;
+  overflow: hidden;
+  padding-bottom: 0.04em;
+}
+
+.portada__renglon > span {
+  display: block;
+  animation: subir 0.9s cubic-bezier(0.2, 0.7, 0.2, 1) both;
+}
+
+.portada__renglon:nth-child(2) > span {
+  animation-delay: 0.1s;
+}
+
+.portada__renglon:nth-child(3) > span {
+  animation-delay: 0.2s;
+}
+
+.portada__linea {
+  display: block;
+  width: 48px;
+  height: 2px;
+  margin-top: 18px;
+  background: var(--acento);
+}
+
+.portada__bajada {
+  max-width: 340px;
+  margin-top: 22px;
+  font-family: var(--fuente-titulos);
+  font-size: clamp(17px, 2.6vw, 21px);
+  line-height: 1.45;
+  color: var(--gris-900);
+  animation: entrar 0.8s 0.3s both;
+}
+
+.portada__acciones {
+  margin-top: 28px;
+  animation: entrar 0.8s 0.4s both;
+}
+
+.portada__boton {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  height: 52px;
+  padding: 0 34px;
+  border-radius: 999px;
+  background: var(--acento);
+  color: var(--blanco);
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  box-shadow: 0 8px 22px rgba(196, 96, 127, 0.32);
+  transition: background var(--transicion), transform var(--transicion), box-shadow var(--transicion);
+}
+
+.portada__boton:hover {
+  background: var(--acento-oscuro);
+  transform: translateY(-2px);
+  box-shadow: 0 12px 26px rgba(196, 96, 127, 0.4);
+}
+
+@keyframes subir {
+  from {
+    transform: translateY(105%);
+  }
+}
+
+@keyframes entrar {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .portada__etiqueta,
+  .portada__renglon > span,
+  .portada__bajada,
+  .portada__acciones {
+    animation: none;
+  }
+}
+
+/* En celular el texto queda sobre la foto, con más velo para que se lea */
+@media (max-width: 767px) {
+  .portada::after {
+    background: linear-gradient(180deg, rgba(248, 228, 226, 0.9) 0%, rgba(248, 228, 226, 0.7) 55%, rgba(248, 228, 226, 0.25) 100%);
+  }
+
+  .portada__foto {
+    object-position: 72% 50%;
+  }
+}
+
+/* ==========================================================
+   COLECCIONES
+   ========================================================== */
+.colecciones {
+  padding-top: 22px;
+}
+
+.colecciones__lista {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 12px;
+}
+
+.coleccion__link {
+  position: relative;
+  display: block;
+  aspect-ratio: 1.17 / 1;
+  overflow: hidden;
+  border-radius: var(--radio);
+  background: var(--gris-100);
+}
+
+.coleccion__link img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.8s cubic-bezier(0.2, 0.7, 0.2, 1);
+}
+
+.coleccion__link::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(45, 36, 41, 0) 45%, rgba(45, 36, 41, 0.62) 100%);
+}
+
+.coleccion__link:hover img {
+  transform: scale(1.05);
+}
+
+.coleccion__info {
+  position: absolute;
+  left: 24px;
+  right: 24px;
+  bottom: 20px;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  color: var(--blanco);
+}
+
+.coleccion__nombre {
+  font-family: var(--fuente-titulos);
+  font-size: clamp(28px, 3.4vw, 38px);
+  font-weight: 400;
+  line-height: 1.1;
+}
+
+.coleccion__ver {
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+}
+
+.coleccion__ver span {
+  display: inline-block;
+  transition: transform var(--transicion);
+}
+
+.coleccion__link:hover .coleccion__ver span {
+  transform: translateX(5px);
+}
+
+/* ==========================================================
+   MÁS ELEGIDOS
+   ========================================================== */
+.elegidos {
+  padding-top: 52px;
+}
+
+.elegidos__cabecera {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 22px;
+}
+
+.elegidos__etiqueta {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.26em;
+  text-transform: uppercase;
+  color: var(--acento);
+}
+
+.elegidos__etiqueta::before {
+  content: "";
+  width: 30px;
+  height: 1.5px;
+  background: var(--acento);
+}
+
+.elegidos__titulo {
+  margin-top: 8px;
+  font-family: var(--fuente-titulos);
+  font-size: clamp(28px, 4.6vw, 42px);
+  font-weight: 500;
+  line-height: 1.05;
+  text-transform: uppercase;
+}
+
+.elegidos__ver {
+  flex: none;
+  padding-bottom: 6px;
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--acento);
+}
+
+.elegidos__ver:hover {
+  color: var(--acento-oscuro);
+}
+
+.elegidos__grilla {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+}
+
+/* ==========================================================
+   TABLET ≥ 768px
+   ========================================================== */
+@media (min-width: 768px) {
+  .portada__grilla {
+    min-height: 470px;
+  }
+
+  .colecciones__lista {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 14px;
+  }
+
+  .colecciones {
+    padding-top: 28px;
+  }
+
+  .elegidos__grilla {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 14px;
+  }
+}
+
+@media (min-width: 1100px) {
+  .portada__grilla {
+    min-height: 500px;
+  }
+}
