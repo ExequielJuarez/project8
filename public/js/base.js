@@ -42,11 +42,12 @@
   overlay.addEventListener("click", cerrarPaneles);
   document.addEventListener("keydown", (e) => e.key === "Escape" && cerrarPaneles());
   window.matchMedia("(min-width: 1100px)").addEventListener("change", cerrarPaneles);
+  window.matchMedia("(min-width: 1280px)").addEventListener("change", cerrarPaneles);
 
   // Menú en celular: las pestañas con submenú se despliegan al tocarlas
   $$("[data-submenu]").forEach((enlace) =>
     enlace.addEventListener("click", (e) => {
-      if (window.matchMedia("(min-width: 1100px)").matches) return;
+      if (window.matchMedia("(min-width: 1280px)").matches) return;
       e.preventDefault();
       enlace.parentElement.classList.toggle("sub-abierto");
     })

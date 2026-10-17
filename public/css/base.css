@@ -1654,6 +1654,32 @@ select.campo__control {
     --gutter: 40px;
   }
 
+  .footer__grilla {
+    grid-template-columns: 1.6fr 1fr 1fr 1.2fr;
+    gap: 48px;
+    padding-top: 64px;
+  }
+
+  .relacionados {
+    padding-top: 88px;
+    padding-bottom: 96px;
+  }
+
+  .relacionados__grilla {
+    grid-auto-flow: row;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    grid-auto-columns: auto;
+    gap: 20px;
+    margin: 0;
+    padding: 0;
+    overflow: visible;
+  }
+}
+
+/* ==========================================================
+   MENÚ HORIZONTAL ≥ 1280px (debajo, el menú es el panel lateral)
+   ========================================================== */
+@media (min-width: 1280px) {
   .header__menu-btn {
     display: none;
   }
@@ -1681,9 +1707,9 @@ select.campo__control {
 
   .nav__lista {
     flex-direction: row;
-    flex-wrap: wrap;
+    flex-wrap: nowrap;
     justify-content: center;
-    gap: 0 clamp(8px, 1.5vw, 26px);
+    gap: 0 clamp(2px, 0.5vw, 12px);
   }
 
   .nav__item {
@@ -1694,10 +1720,10 @@ select.campo__control {
     position: relative;
     justify-content: flex-start;
     gap: 9px;
-    padding: 13px 10px;
+    padding: 13px clamp(6px, 0.55vw, 9px);
     border: 0;
     font-family: var(--fuente-texto);
-    font-size: 14.5px;
+    font-size: 14px;
     white-space: nowrap;
     font-weight: 400;
   }
@@ -1769,26 +1795,5 @@ select.campo__control {
   .nav__sub a:hover {
     background: var(--rosa-suave);
     color: var(--acento);
-  }
-
-  .footer__grilla {
-    grid-template-columns: 1.6fr 1fr 1fr 1.2fr;
-    gap: 48px;
-    padding-top: 64px;
-  }
-
-  .relacionados {
-    padding-top: 88px;
-    padding-bottom: 96px;
-  }
-
-  .relacionados__grilla {
-    grid-auto-flow: row;
-    grid-template-columns: repeat(4, minmax(0, 1fr));
-    grid-auto-columns: auto;
-    gap: 20px;
-    margin: 0;
-    padding: 0;
-    overflow: visible;
   }
 }
