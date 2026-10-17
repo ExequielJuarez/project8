@@ -23,9 +23,8 @@ Más detalles: [database/README.md](database/README.md), [PAGOS.md](PAGOS.md),
 
 ## Fotos
 
-Las imágenes del catálogo y del inicio son ilustraciones de muestra (`database/fotos-demo/generar.js`).
-Para usar fotos reales: Admin → Productos → Editar → Imágenes, y Admin → Inicio para la portada y
-las colecciones.
+Las fotos del catálogo están en `public/img/productos` y las del inicio en `public/img/inicio`. Se cambian desde
+Admin → Productos → Editar → Imágenes y Admin → Inicio.
 
 ## Talles
 

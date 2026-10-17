@@ -39,7 +39,7 @@ const SECCIONES = {
       bajada: parrafo("Texto debajo del título", "Prendas para acompañarte todos los días.", 120),
       botonTexto: texto("Botón", "Ver colección", 30, { ancho: "medio" }),
       botonLink: link("Link del botón", "/tienda"),
-      imagen: imagen("Foto principal", IMG("portada.svg"), {
+      imagen: imagen("Foto principal", IMG("portada.jpg"), {
         ayuda: "Queda mejor una foto horizontal, con la modelo del lado derecho.",
         fondo: "claro",
       }),
@@ -61,9 +61,9 @@ const SECCIONES = {
           imagen: imagen("Foto", ""),
         },
         defecto: [
-          { nombre: "Blusas", link: "/categoria/blusas", imagen: IMG("coleccion-blusas.svg") },
-          { nombre: "Pantalones", link: "/categoria/pantalones", imagen: IMG("coleccion-pantalones.svg") },
-          { nombre: "Vestidos", link: "/categoria/vestidos", imagen: IMG("coleccion-vestidos.svg") },
+          { nombre: "Blusas", link: "/categoria/blusas", imagen: IMG("coleccion-blusas.jpg") },
+          { nombre: "Pantalones", link: "/categoria/pantalones", imagen: IMG("coleccion-pantalones.jpg") },
+          { nombre: "Vestidos", link: "/categoria/vestidos", imagen: IMG("coleccion-vestidos.jpg") },
         ],
       },
     },

@@ -34,7 +34,7 @@ const limpiarMenu = () => (menuCache = null);
 
 // Las categorías de prendas superiores se agrupan en la pestaña "Ropa" del menú;
 // el resto (Pantalones, Vestidos, Accesorios, las que se agreguen) van sueltas.
-const GRUPO_ROPA = ["blusas", "tops", "blazers"];
+const GRUPO_ROPA = ["blusas", "tops", "buzos", "blazers"];
 
 // Pestañas del menú: Inicio · Novedades · Ropa ▾ · <categorías> ▾ · Ofertas
 async function navegacion() {
