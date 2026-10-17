@@ -13,19 +13,19 @@
   --gris-900: #5a4850;
   --gris-600: #86737b;
   --gris-400: #bba8b0;
-  --gris-200: #eddfe2;
-  --gris-100: #f7eeee;
-  --hueso: #fcf5f3;
-  --blanco: #fffcfb;
+  --gris-200: #eee4e6;
+  --gris-100: #f8f4f4;
+  --hueso: #fffdfd;
+  --blanco: #ffffff;
   /* Acentos: rosa de los botones y rosa claro; dorado para detalles */
   --acento: #c4607f;
   --acento-oscuro: #ac4a69;
   --acento-claro: #eba9bc;
   --dorado: #c9a24a;
   /* Franjas del encabezado */
-  --rosa-header: #f5c8d4;
-  --rosa-nav: #fae3e9;
-  --rosa-suave: #fbeaed;
+  --rosa-header: #f6d3dc;
+  --rosa-nav: #ffffff;
+  --rosa-suave: #fff6f8;
 
   --fuente-titulos: "Playfair Display", Georgia, "Times New Roman", serif;
   --fuente-texto: "Jost", system-ui, -apple-system, "Segoe UI", sans-serif;
@@ -220,7 +220,8 @@ ul {
   position: sticky;
   top: 0;
   z-index: 50;
-  background: var(--rosa-header);
+  /* Rosa suave arriba que se difumina hacia el blanco */
+  background: linear-gradient(180deg, #f4c9d5 0%, #f9dfe6 38%, #fdf1f4 72%, #ffffff 100%);
   transition: box-shadow var(--transicion);
 }
 
@@ -933,7 +934,7 @@ ul {
 .beneficios {
   margin-top: 48px;
   background: var(--rosa-suave);
-  border-top: 1px solid var(--gris-200);
+  border-top: 1px solid #f3e1e5;
 }
 
 .beneficios__grilla {
@@ -1665,6 +1666,7 @@ select.campo__control {
     transform: none;
     overflow: visible;
     background: var(--rosa-nav);
+    border-bottom: 1px solid #f3e1e5;
   }
 
   .nav__lista {

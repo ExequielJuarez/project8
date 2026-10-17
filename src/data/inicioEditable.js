@@ -57,11 +57,11 @@ const SECCIONES = {
         cantidad: 3,
         campos: {
           nombre: texto("Nombre", "", 30, { ancho: "medio" }),
-          link: link("Link", "", { ayuda: "Ej: /categoria/blusas abre esa sección; /categoria/pantalones?sub=palazzo, ya filtrada; /ofertas, las ofertas." }),
+          link: link("Link", "", { ayuda: "Ej: /categoria/remeras abre esa sección; /categoria/pantalones?sub=jeans, ya filtrada; /ofertas, las ofertas." }),
           imagen: imagen("Foto", ""),
         },
         defecto: [
-          { nombre: "Blusas", link: "/categoria/blusas", imagen: IMG("coleccion-blusas.jpg") },
+          { nombre: "Remeras", link: "/categoria/remeras", imagen: IMG("coleccion-blusas.jpg") },
           { nombre: "Pantalones", link: "/categoria/pantalones", imagen: IMG("coleccion-pantalones.jpg") },
           { nombre: "Vestidos", link: "/categoria/vestidos", imagen: IMG("coleccion-vestidos.jpg") },
         ],
