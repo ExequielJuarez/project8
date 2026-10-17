@@ -18,6 +18,7 @@ const soloLogueados = require("../middlewares/soloLogueados");
 const legal = require("../controllers/legalController");
 const perfilValidator = require("../validations/perfilValidator");
 const claveValidator = require("../validations/claveValidator");
+const { GRUPOS, OCASIONES, TEMPORADAS, FITS, nombreDe } = require("../data/clasificacion");
 
 // ── INICIO ─────────────────────────────────────────────────
 // Los textos y fotos se editan desde Admin → Inicio.
@@ -66,6 +67,11 @@ async function grupoCategorias(productos) {
   };
 }
 
+// Opciones de los filtros de ocasión y fit (solo los que tienen productos)
+const ocasionesDe = (productos) =>
+  OCASIONES.map((o) => ({ ...o, cantidad: productos.filter((p) => p.ocasiones.includes(o.valor)).length })).filter((o) => o.cantidad > 0);
+const fitsDe = (productos) => FITS.map((f) => ({ ...f, cantidad: productos.filter((p) => p.fit === f.valor).length })).filter((f) => f.cantidad > 0);
+
 async function renderCatalogo(res, { productos, grupo, categoria = null, subElegida = null, ...datos }) {
   res.render("catalogo", {
     estilo: "catalogo",
@@ -76,6 +82,8 @@ async function renderCatalogo(res, { productos, grupo, categoria = null, subEleg
     grupo,
     colores: await coloresDe(productos),
     talles: tallesDe(productos),
+    ocasiones: ocasionesDe(productos),
+    fits: fitsDe(productos),
     rangoPrecio: rangoDePrecios(productos),
     ...datos,
   });
@@ -118,6 +126,48 @@ router.get("/ofertas", async (req, res) => {
     productos,
     grupo: await grupoCategorias(productos),
   });
+});
+
+// Todas las categorías de un grupo del menú: /prendas/superiores
+router.get("/prendas/:grupo", async (req, res, next) => {
+  const grupo = GRUPOS.find((g) => g.clave === req.params.grupo);
+  if (!grupo) return next();
+  const productos = (await productoService.listar()).filter((p) => grupo.slugs.includes(p.categoriaSlug));
+  await renderCatalogo(res, {
+    titulo: grupo.nombre,
+    navActivo: grupo.clave,
+    modo: "coleccion",
+    encabezado: { titulo: grupo.nombre, bajada: "Encontrá tu estilo" },
+    productos,
+    grupo: await grupoCategorias(productos),
+  });
+});
+
+// Filtros rápidos del menú: por ocasión, por temporada y por fit
+const rapidos = {
+  ocasion: { lista: OCASIONES, clave: "ocasion", bajada: "Ocasión", filtra: (p, v) => p.ocasiones.includes(v) },
+  temporada: { lista: TEMPORADAS, clave: "temporada", bajada: "Temporada", filtra: (p, v) => p.temporada === v || !p.temporada },
+  fit: { lista: FITS, clave: "fit", bajada: "Fit", filtra: (p, v) => p.fit === v },
+};
+for (const [tipo, r] of Object.entries(rapidos)) {
+  router.get(`/${tipo}/:valor`, async (req, res, next) => {
+    const nombre = nombreDe(r.lista, req.params.valor);
+    if (!nombre) return next();
+    const productos = (await productoService.listar()).filter((p) => r.filtra(p, req.params.valor));
+    await renderCatalogo(res, {
+      titulo: nombre,
+      navActivo: r.clave,
+      modo: "coleccion",
+      encabezado: { titulo: nombre, bajada: r.bajada },
+      productos,
+      grupo: await grupoCategorias(productos),
+    });
+  });
+}
+
+// Guía de talles y fit
+router.get("/guia-de-talles", (req, res) => {
+  res.render("guia-talles", { titulo: "Guía de talles y fit", estilo: ["catalogo", "guia-talles"], navActivo: "fit", fits: FITS });
 });
 
 router.get("/categoria/:slug", async (req, res, next) => {

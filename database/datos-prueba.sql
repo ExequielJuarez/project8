@@ -53,21 +53,24 @@ INSERT INTO usuarios (id, nombre, apellido, email, telefono, password, google_id
 
 -- ── Categorías y colores ────────────────────────────────
 INSERT INTO categorias (id, nombre, slug, orden) VALUES
-  (1, 'Camperas', 'camperas', 1),
-  (2, 'Remeras', 'remeras', 2),
-  (3, 'Tops', 'tops', 3),
-  (4, 'Pantalones', 'pantalones', 4),
-  (5, 'Polleras', 'polleras', 5),
-  (6, 'Shorts', 'shorts', 6),
-  (7, 'Vestidos', 'vestidos', 7);
+  (1, 'Remeras y camisetas', 'remeras-y-camisetas', 1),
+  (2, 'Blusas y camisas', 'blusas-y-camisas', 2),
+  (3, 'Tops y musculosas', 'tops-y-musculosas', 3),
+  (4, 'Buzos, sweaters y cárdigans', 'buzos-sweaters-y-cardigans', 4),
+  (5, 'Camperas, blazers y abrigos', 'camperas-blazers-y-abrigos', 5),
+  (6, 'Pantalones', 'pantalones', 6),
+  (7, 'Jeans / Denim', 'jeans-y-denim', 7),
+  (8, 'Faldas y minis', 'faldas-y-minis', 8),
+  (9, 'Shorts y bermudas', 'shorts-y-bermudas', 9),
+  (10, 'Leggings / Calzas', 'leggings-y-calzas', 10),
+  (11, 'Vestidos de día / Casuales', 'vestidos-de-dia', 11),
+  (12, 'Vestidos de noche / Fiesta', 'vestidos-de-noche', 12),
+  (13, 'Monos / Jumpsuits', 'monos-y-jumpsuits', 13),
+  (14, 'Conjuntos y corpiños', 'conjuntos-y-corpinos', 14),
+  (15, 'Pijamas y camisones', 'pijamas-y-camisones', 15),
+  (16, 'Ropa térmica', 'ropa-termica', 16);
 
 -- Subcategorías: los filtros propios de cada sección
-INSERT INTO subcategorias (id, categoria_id, nombre, slug, orden) VALUES
-  (1, 4, 'Jeans', 'jeans', 1),
-  (2, 4, 'Palazzo', 'palazzo', 2),
-  (3, 7, 'Largos', 'largos', 1),
-  (4, 7, 'Cortos', 'cortos', 2);
-
 INSERT INTO colores (id, valor, nombre, hex, orden) VALUES
   (1, 'negro', 'Negro', '#1f1a1c', 1),
   (2, 'chocolate', 'Chocolate', '#4a2f27', 2),
@@ -80,93 +83,93 @@ INSERT INTO colores (id, valor, nombre, hex, orden) VALUES
   (9, 'blanco', 'Blanco', '#fbf8f4', 9);
 
 -- ── Productos (imágenes en public/img/productos) ────────
-INSERT INTO productos (id, nombre, categoria_id, subcategoria_id, color_id, precio, costo, stock, talles, etiqueta, resumen, descripcion, destacados) VALUES
-  (1, 'Campera de Cuero', 1, NULL, 1, 89900, 45000, 8, 'XS,S,M,L,XL', 'Más elegido', 'Campera de cuero ecológico estilo motociclista, con cierre cruzado y bolsillos. Una pieza que sube cualquier outfit.', 'La campera perfecta para el entretiempo: corte biker, cierres metálicos y un calce que estiliza.
+INSERT INTO productos (id, nombre, categoria_id, subcategoria_id, color_id, precio, costo, stock, talles, ocasiones, temporada, fit, etiqueta, resumen, descripcion, destacados) VALUES
+  (1, 'Campera de Cuero', 5, NULL, 1, 89900, 45000, 8, 'XS,S,M,L,XL', 'casual,fiesta-noche', 'otono-invierno', 'recto', 'Más elegido', 'Campera de cuero ecológico estilo motociclista, con cierre cruzado y bolsillos. Una pieza que sube cualquier outfit.', 'La campera perfecta para el entretiempo: corte biker, cierres metálicos y un calce que estiliza.
 
 Combina con jeans, vestidos y faldas. Disponible en negro, chocolate y bordó.', 'Cierre cruzado metálico
 Forro interior suave
 Bolsillos con cierre'),
-  (2, 'Jean Wide Leg', 4, 1, 6, 52900, 26000, 14, 'XS,S,M,L,XL', 'Nuevo', 'Jean de pierna ancha con lavado azul intenso. Tiro alto y caída larga.', 'Un jean wide leg con mucho movimiento: tiro alto, cintura marcada y pierna que cae derecha.
+  (2, 'Jean Wide Leg', 7, NULL, 6, 52900, 26000, 14, 'XS,S,M,L,XL', 'casual', NULL, 'wide', 'Nuevo', 'Jean de pierna ancha con lavado azul intenso. Tiro alto y caída larga.', 'Un jean wide leg con mucho movimiento: tiro alto, cintura marcada y pierna que cae derecha.
 
 Se luce con zapatillas, botas o plataformas.', 'Tiro alto
 Pierna ancha con caída larga
 Lavado azul intenso'),
-  (3, 'Jean Franja Gris', 4, 1, 7, 49900, 24500, 12, 'XS,S,M,L,XL', 'Más elegido', 'Jean gris de pierna recta con franjas laterales. Estilo deportivo y urbano.', 'Un jean con carácter: lavado gris, pierna ancha y franjas laterales que le dan un toque sporty.
+  (3, 'Jean Franja Gris', 7, NULL, 7, 49900, 24500, 12, 'XS,S,M,L,XL', 'casual', NULL, 'wide', 'Más elegido', 'Jean gris de pierna recta con franjas laterales. Estilo deportivo y urbano.', 'Un jean con carácter: lavado gris, pierna ancha y franjas laterales que le dan un toque sporty.
 
 Ideal con remeras cortas y zapatillas.', 'Franjas laterales
 Pierna recta amplia
 Lavado gris'),
-  (4, 'Pantalón Palazzo Sastrero', 4, 2, 4, 46900, 23200, 18, 'XS,S,M,L,XL', 'Más elegido', 'Palazzo de tela fluida con pinzas, tiro alto y pierna bien ancha. Elegante y cómodo.', 'El pantalón que resuelve la oficina y la salida: caída fluida, pinzas delanteras y tiro alto.
+  (4, 'Pantalón Palazzo Sastrero', 6, NULL, 4, 46900, 23200, 18, 'XS,S,M,L,XL', 'oficina,casual', NULL, 'wide', 'Más elegido', 'Palazzo de tela fluida con pinzas, tiro alto y pierna bien ancha. Elegante y cómodo.', 'El pantalón que resuelve la oficina y la salida: caída fluida, pinzas delanteras y tiro alto.
 
 Disponible en varios colores neutros para combinar con todo.', 'Tela fluida con caída
 Pinzas delanteras
 Tiro alto'),
-  (5, 'Pollera Mini Cuero', 5, NULL, 1, 34900, 17000, 10, 'XS,S,M,L,XL', NULL, 'Minipollera de cuero ecológico con cierre trasero. Para animarse.', 'Una mini de línea recta y tiro alto, con tela símil cuero de buen cuerpo.
+  (5, 'Pollera Mini Cuero', 8, NULL, 1, 34900, 17000, 10, 'XS,S,M,L,XL', 'fiesta-noche,casual', 'otono-invierno', 'slim', NULL, 'Minipollera de cuero ecológico con cierre trasero. Para animarse.', 'Una mini de línea recta y tiro alto, con tela símil cuero de buen cuerpo.
 
 Con botas o zapatillas, y una remera básica.', 'Línea recta
 Cierre trasero
 Símil cuero'),
-  (6, 'Pollera Short Crema', 5, NULL, 4, 29900, 14500, 15, 'XS,S,M,L,XL', 'Oferta', 'Pollera short plisada con cinto, en tonos tierra. Fresca y cómoda.', 'Una pollera con short por dentro, plisada y con cinturón. Ideal para días de calor.
+  (6, 'Pollera Short Crema', 8, NULL, 4, 29900, 14500, 15, 'XS,S,M,L,XL', 'casual,playero', 'primavera-verano', 'recto', 'Oferta', 'Pollera short plisada con cinto, en tonos tierra. Fresca y cómoda.', 'Una pollera con short por dentro, plisada y con cinturón. Ideal para días de calor.
 
 Disponible en crema, beige y chocolate.', 'Short interior
 Plisada con cinturón
 Tela liviana'),
-  (7, 'Remera Rib con Vivos', 2, NULL, 4, 21900, 10500, 25, 'XS,S,M,L,XL', 'Nuevo', 'Remera de morley rib con cuello y puños contrastantes. Un básico con detalle.', 'Remera corta de tejido canalé suave, con vivos que resaltan el cuello y las mangas.
+  (7, 'Remera Rib con Vivos', 1, NULL, 4, 21900, 10500, 25, 'XS,S,M,L,XL', 'casual', 'primavera-verano', 'slim', 'Nuevo', 'Remera de morley rib con cuello y puños contrastantes. Un básico con detalle.', 'Remera corta de tejido canalé suave, con vivos que resaltan el cuello y las mangas.
 
 Disponible en varios colores.', 'Morley rib elástico
 Vivos contrastantes
 Calce ajustado'),
-  (8, 'Remera Tejida Crema', 2, NULL, 4, 24900, 12000, 16, 'XS,S,M,L,XL', NULL, 'Remera corta de punto tejido texturado, sin mangas anchas. Liviana y fresca.', 'Un tejido calado y texturado que la vuelve especial. Se usa sola o sobre una camisa.
+  (8, 'Remera Tejida Crema', 1, NULL, 4, 24900, 12000, 16, 'XS,S,M,L,XL', 'casual', 'primavera-verano', 'recto', NULL, 'Remera corta de punto tejido texturado, sin mangas anchas. Liviana y fresca.', 'Un tejido calado y texturado que la vuelve especial. Se usa sola o sobre una camisa.
 
 Combina con jeans y polleras.', 'Punto texturado
 Liviana
 Largo corto'),
-  (9, 'Remera Lavada Gris', 2, NULL, 7, 23900, 11500, 18, 'S,M,L,XL', NULL, 'Remera oversize de algodón con lavado desgastado y bolsillo. Estilo vintage.', 'Una remera de calce amplio y lavado stone, con un bolsillo frontal. Cómoda y con onda.
+  (9, 'Remera Lavada Gris', 1, NULL, 7, 23900, 11500, 18, 'S,M,L,XL', 'casual', NULL, 'oversize', NULL, 'Remera oversize de algodón con lavado desgastado y bolsillo. Estilo vintage.', 'Una remera de calce amplio y lavado stone, con un bolsillo frontal. Cómoda y con onda.
 
 Con jeans o con shorts, siempre suma.', 'Lavado desgastado
 Calce oversize
 Bolsillo frontal'),
-  (10, 'Musculosa con Tachas', 3, NULL, 3, 26900, 13000, 12, 'XS,S,M,L,XL', 'Nuevo', 'Musculosa de escote cuadrado con tachas en los breteles. Para destacar.', 'Una musculosa ajustada, con escote cuadrado y detalle de tachas que le da un aire rockero.
+  (10, 'Musculosa con Tachas', 3, NULL, 3, 26900, 13000, 12, 'XS,S,M,L,XL', 'casual,fiesta-noche', 'primavera-verano', 'slim', 'Nuevo', 'Musculosa de escote cuadrado con tachas en los breteles. Para destacar.', 'Una musculosa ajustada, con escote cuadrado y detalle de tachas que le da un aire rockero.
 
 Disponible en bordó, verde y beige.', 'Tachas en los breteles
 Escote cuadrado
 Tela elástica'),
-  (11, 'Top Halter con Broche', 3, NULL, 1, 27900, 13500, 10, 'XS,S,M,L,XL', NULL, 'Top halter de espalda descubierta con broche dorado. Para noches especiales.', 'Un top con cuello halter y escote profundo, cerrado con un broche dorado.
+  (11, 'Top Halter con Broche', 3, NULL, 1, 27900, 13500, 10, 'XS,S,M,L,XL', 'fiesta-noche', 'primavera-verano', 'recto', NULL, 'Top halter de espalda descubierta con broche dorado. Para noches especiales.', 'Un top con cuello halter y escote profundo, cerrado con un broche dorado.
 
 Se luce con pantalón de vestir o pollera.', 'Cuello halter
 Broche dorado
 Espalda descubierta'),
-  (12, 'Top Halter Chocolate', 3, NULL, 2, 28900, 14000, 9, 'XS,S,M,L,XL', 'Más elegido', 'Top halter de raso color chocolate con escote cruzado. Elegante y sensual.', 'Un halter de caída fluida que se ata en la nuca, con detalle cruzado en el frente.
+  (12, 'Top Halter Chocolate', 3, NULL, 2, 28900, 14000, 9, 'XS,S,M,L,XL', 'fiesta-noche', 'primavera-verano', 'slim', 'Más elegido', 'Top halter de raso color chocolate con escote cruzado. Elegante y sensual.', 'Un halter de caída fluida que se ata en la nuca, con detalle cruzado en el frente.
 
 Queda perfecto con una pollera plisada o con jeans.', 'Escote cruzado
 Se ata en la nuca
 Raso suave'),
-  (13, 'Short Chocolate', 6, NULL, 2, 27900, 13400, 14, 'XS,S,M,L,XL', NULL, 'Short de gabardina con tiro alto y botón. Cómodo y combinable.', 'Un short clásico de tiro alto, ideal para las tardes de calor.
+  (13, 'Short Chocolate', 9, NULL, 2, 27900, 13400, 14, 'XS,S,M,L,XL', 'casual,playero', 'primavera-verano', 'recto', NULL, 'Short de gabardina con tiro alto y botón. Cómodo y combinable.', 'Un short clásico de tiro alto, ideal para las tardes de calor.
 
 Con botón y cierre, y bolsillos laterales.', 'Tiro alto
 Gabardina suave
 Bolsillos laterales'),
-  (14, 'Short Crema', 6, NULL, 4, 27900, 13400, 13, 'XS,S,M,L,XL', 'Oferta', 'Short de gabardina en tonos claros, tiro alto, para un look fresco.', 'Un short liviano en color crema que combina con todo.
+  (14, 'Short Crema', 9, NULL, 4, 27900, 13400, 13, 'XS,S,M,L,XL', 'casual,playero', 'primavera-verano', 'recto', 'Oferta', 'Short de gabardina en tonos claros, tiro alto, para un look fresco.', 'Un short liviano en color crema que combina con todo.
 
 Perfecto para el verano.', 'Tiro alto
 Tela liviana
 Colores claros'),
-  (15, 'Short Jean Desflecado', 6, NULL, 6, 29900, 14500, 20, 'XS,S,M,L,XL', 'Más elegido', 'Short de jean con lavado desgastado y bordes desflecados. Un clásico del verano.', 'El short de jean de siempre, con bastas desflecadas y lavado vintage.
+  (15, 'Short Jean Desflecado', 9, NULL, 6, 29900, 14500, 20, 'XS,S,M,L,XL', 'casual,playero', 'primavera-verano', 'recto', 'Más elegido', 'Short de jean con lavado desgastado y bordes desflecados. Un clásico del verano.', 'El short de jean de siempre, con bastas desflecadas y lavado vintage.
 
 Se combina con remeras, tops y camisas.', 'Bastas desflecadas
 Lavado desgastado
 Tiro alto'),
-  (16, 'Vestido Halter Metalizado', 7, 3, 2, 64900, 32000, 6, 'XS,S,M,L,XL', 'Nuevo', 'Vestido largo halter con brillo metalizado y escote cruzado. Para eventos y noches especiales.', 'Un vestido largo con tela de brillo suave y escote cruzado. Se ajusta al cuerpo y cae recto.
+  (16, 'Vestido Halter Metalizado', 12, NULL, 2, 64900, 32000, 6, 'XS,S,M,L,XL', 'fiesta-noche', NULL, 'slim', 'Nuevo', 'Vestido largo halter con brillo metalizado y escote cruzado. Para eventos y noches especiales.', 'Un vestido largo con tela de brillo suave y escote cruzado. Se ajusta al cuerpo y cae recto.
 
 El detalle del escote lo hace inolvidable.', 'Tela con brillo metalizado
 Escote cruzado
 Largo maxi'),
-  (17, 'Vestido Largo Estampado', 7, 3, 1, 58900, 29000, 9, 'XS,S,M,L,XL', 'Más elegido', 'Vestido largo con escote en V profundo y espalda abierta, estampado boho.', 'Un vestido fluido con estampa étnica, escote en V y espalda descubierta. Ideal para el verano y las fiestas.
+  (17, 'Vestido Largo Estampado', 11, NULL, 1, 58900, 29000, 9, 'XS,S,M,L,XL', 'casual,playero', 'primavera-verano', 'recto', 'Más elegido', 'Vestido largo con escote en V profundo y espalda abierta, estampado boho.', 'Un vestido fluido con estampa étnica, escote en V y espalda descubierta. Ideal para el verano y las fiestas.
 
 Con botas o sandalias.', 'Estampado boho
 Escote en V y espalda abierta
 Tela fluida'),
-  (18, 'Vestido Tul Estampado', 7, 3, 2, 61900, 30500, 7, 'XS,S,M,L,XL', NULL, 'Vestido largo de tul con estampa degradé y mangas largas. Delicado y moderno.', 'Un vestido de tul con estampa en tonos tierra, mangas largas y largo hasta el tobillo.
+  (18, 'Vestido Tul Estampado', 12, NULL, 2, 61900, 30500, 7, 'XS,S,M,L,XL', 'fiesta-noche', 'otono-invierno', 'recto', NULL, 'Vestido largo de tul con estampa degradé y mangas largas. Delicado y moderno.', 'Un vestido de tul con estampa en tonos tierra, mangas largas y largo hasta el tobillo.
 
 Se usa con cinturón para marcar la cintura.', 'Tul con estampa degradé
 Mangas largas

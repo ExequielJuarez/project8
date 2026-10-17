@@ -63,6 +63,8 @@ document.addEventListener("DOMContentLoaded", () => {
       // Filtro propio de la página: subcategorías (sección) o categorías (resto)
       grupo: $$(`input[name="${campoGrupo}"]:checked`).map((i) => i.value),
       talles: $$('input[name="talle"]:checked').map((i) => i.value),
+      ocasiones: $$('input[name="ocasion"]:checked').map((i) => i.value),
+      fits: $$('input[name="fit"]:checked').map((i) => i.value),
       colores: $$('input[name="color"]:checked').map((i) => i.value),
       min,
       max,
@@ -78,6 +80,8 @@ document.addEventListener("DOMContentLoaded", () => {
       const pasa =
         (!f.grupo.length || f.grupo.includes(t.dataset[campoGrupo])) &&
         (!f.talles.length || (t.dataset.talles || "").split(",").some((x) => f.talles.includes(x))) &&
+        (!f.ocasiones.length || (t.dataset.ocasiones || "").split(",").some((x) => f.ocasiones.includes(x))) &&
+        (!f.fits.length || f.fits.includes(t.dataset.fit)) &&
         (!f.colores.length || (t.dataset.colores || "").split(" ").some((c) => f.colores.includes(c))) &&
         precio >= f.min &&
         precio <= f.max;
@@ -123,6 +127,16 @@ document.addEventListener("DOMContentLoaded", () => {
         texto: $(`input[name="${campoGrupo}"][value="${CSS.escape(v)}"]`)?.closest("label").querySelector(".check__texto").textContent || v,
       })),
       ...f.talles.map((v) => ({ tipo: "talle", valor: v, texto: `Talle ${v}` })),
+      ...f.ocasiones.map((v) => ({
+        tipo: "ocasion",
+        valor: v,
+        texto: $(`input[name="ocasion"][value="${CSS.escape(v)}"]`)?.closest("label").querySelector(".check__texto").textContent || v,
+      })),
+      ...f.fits.map((v) => ({
+        tipo: "fit",
+        valor: v,
+        texto: $(`input[name="fit"][value="${CSS.escape(v)}"]`)?.closest("label").querySelector(".check__texto").textContent || v,
+      })),
       ...f.colores.map((v) => ({
         tipo: "color",
         valor: v,

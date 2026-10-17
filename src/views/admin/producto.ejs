@@ -71,6 +71,7 @@
               <div><dt>Ganancia por unidad</dt><dd><strong><%= formatoPrecio(p.precio - p.costo) %></strong> (<%= formatoPorcentaje(margen) %>)</dd></div>
               <div><dt>Categoría</dt><dd><%= p.categoria %></dd></div>
               <div><dt>Subcategoría</dt><dd><%= p.subcategoria || '—' %></dd></div>
+              <% if (p.fit || p.temporada || p.ocasiones.length) { %><div><dt>Clasificación</dt><dd><%= [p.fit && 'Fit ' + nombreDe(FITS, p.fit), p.temporada && nombreDe(TEMPORADAS, p.temporada), ...p.ocasiones.map(o => nombreDe(OCASIONES, o))].filter(Boolean).join(' · ') %></dd></div><% } %>
               <% if (p.talles.length) { %><div><dt>Talles</dt><dd><%= p.talles.join(' · ') %></dd></div><% } %>
               <div><dt><%= p.colores.length > 1 ? `Colores (${p.colores.length})` : 'Color' %></dt><dd class="lista-colores">
                 <% p.colores.forEach(c => { %><span><span class="punto-color" style="--muestra: <%= c.hex %>"></span><%= c.nombre %></span><% }) %>

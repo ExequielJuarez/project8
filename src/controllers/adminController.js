@@ -39,6 +39,9 @@ async function renderFormulario(res, req, { producto = null, datos, errores = {}
       categoriasCompletas,
       colores,
       TALLES: productoService.TALLES,
+      OCASIONES: require("../data/clasificacion").OCASIONES,
+      TEMPORADAS: require("../data/clasificacion").TEMPORADAS,
+      FITS: require("../data/clasificacion").FITS,
       productoTalles: productoService.listaDeTalles,
       MAX_IMAGENES: productoService.MAX_IMAGENES,
     })
@@ -136,7 +139,7 @@ module.exports = {
 
   // ── Productos: crear ───────────────────────────────────────
   async nuevo(req, res) {
-    await renderFormulario(res, req, { datos: { categoria: "", subcategoria: "", colores: [], talles: [], stock: 0 } });
+    await renderFormulario(res, req, { datos: { categoria: "", subcategoria: "", colores: [], talles: [], ocasiones: [], stock: 0 } });
   },
 
   async crear(req, res) {

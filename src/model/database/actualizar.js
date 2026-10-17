@@ -10,6 +10,9 @@ const { DataTypes } = db.Sequelize;
 const COLUMNAS = {
   productos: {
     talles: { type: DataTypes.STRING(60) },
+    ocasiones: { type: DataTypes.STRING(80) },
+    temporada: { type: DataTypes.STRING(30) },
+    fit: { type: DataTypes.STRING(20) },
   },
   pedido_items: {
     talle: { type: DataTypes.STRING(20) },

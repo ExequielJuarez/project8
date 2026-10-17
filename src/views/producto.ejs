@@ -93,6 +93,12 @@
         </div>
 
         <p class="info__resumen"><%= p.resumen %></p>
+        <% if (p.fit || p.ocasiones.length) { %>
+          <p class="info__fit">
+            <% if (p.fit) { %><a href="/fit/<%= p.fit %>">Fit <%= nombreDe(FITS, p.fit) %></a><% } %>
+            <% p.ocasiones.forEach(o => { %><a href="/ocasion/<%= o %>"><%= nombreDe(OCASIONES, o) %></a><% }) %>
+          </p>
+        <% } %>
 
         <!-- Variantes de color: solo si se vende en más de un color (con uno solo, ese va al carrito) -->
         <% if (p.colores.length > 1) { %>

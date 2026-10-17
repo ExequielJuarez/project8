@@ -99,8 +99,8 @@
     <ul class="nav__lista contenedor">
       <% (locals.nav || []).forEach(item => {
            const activo = locals.navActivo === item.clave || (item.claves || []).includes(locals.navActivo); %>
-        <li class="nav__item <%= activo ? 'nav__item--activo' : '' %>">
-          <a href="<%= item.url %>" <%- activo ? 'aria-current="page"' : '' %>>
+        <li class="nav__item <%= activo ? 'nav__item--activo' : '' %> <%= item.hijos.length ? 'nav__item--con-sub' : '' %> <%= item.soloMovil ? 'nav__item--solo-drawer' : '' %>">
+          <a href="<%= item.url %>" <%- activo ? 'aria-current="page"' : '' %> <%- item.hijos.length ? 'data-submenu aria-haspopup="true"' : '' %>>
             <%= item.nombre %>
             <% if (item.hijos.length) { %>
               <svg class="nav__chevron" viewBox="0 0 12 12" width="10" height="10" aria-hidden="true"><path d="M2 4l4 4 4-4" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>

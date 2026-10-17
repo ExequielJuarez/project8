@@ -5,6 +5,7 @@
 
 const { Op } = require("sequelize");
 const db = require("../model/database/models");
+const { OCASIONES, TEMPORADAS, FITS, validos } = require("../data/clasificacion");
 
 const STOCK_BAJO = 5;
 // Talles que se pueden asignar a una prenda (en este orden se muestran)
@@ -59,6 +60,9 @@ function plano(p) {
     costo: x.costo,
     stock: x.stock,
     talles: listaDeTalles(x.talles),
+    ocasiones: validos(OCASIONES, x.ocasiones),
+    temporada: x.temporada || "",
+    fit: x.fit || "",
     etiqueta: x.etiqueta,
     // Lista de fotos [{ id, ruta }] y la principal suelta para tarjetas y carrito
     imagenes: (x.imagenes || []).sort((a, b) => a.orden - b.orden || a.id - b.id).map(({ id, ruta }) => ({ id, ruta })),
@@ -246,6 +250,9 @@ async function datosParaGuardar(datos) {
     costo: Number(datos.costo),
     stock: Math.max(0, parseInt(datos.stock, 10) || 0),
     talles: listaDeTalles(datos.talles).join(",") || null,
+    ocasiones: validos(OCASIONES, datos.ocasiones).join(",") || null,
+    temporada: TEMPORADAS.some((t) => t.valor === datos.temporada) ? datos.temporada : null,
+    fit: FITS.some((f) => f.valor === datos.fit) ? datos.fit : null,
     etiqueta: String(datos.etiqueta || "").trim() || null,
   };
 }

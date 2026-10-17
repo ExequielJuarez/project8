@@ -98,6 +98,36 @@
         </section>
         <% } %>
 
+        <% if (locals.ocasiones && ocasiones.length) { %>
+        <section class="filtro">
+          <h3 class="filtro__titulo">Ocasión</h3>
+          <div class="filtro__opciones">
+            <% ocasiones.forEach(o => { %>
+              <label class="check">
+                <input type="checkbox" name="ocasion" value="<%= o.valor %>">
+                <span class="check__caja"></span>
+                <span class="check__texto"><%= o.nombre %></span>
+              </label>
+            <% }) %>
+          </div>
+        </section>
+        <% } %>
+
+        <% if (locals.fits && fits.length) { %>
+        <section class="filtro">
+          <h3 class="filtro__titulo">Fit</h3>
+          <div class="filtro__opciones">
+            <% fits.forEach(f => { %>
+              <label class="check">
+                <input type="checkbox" name="fit" value="<%= f.valor %>">
+                <span class="check__caja"></span>
+                <span class="check__texto"><%= f.nombre %></span>
+              </label>
+            <% }) %>
+          </div>
+        </section>
+        <% } %>
+
         <% if (colores.length) { %>
         <section class="filtro">
           <h3 class="filtro__titulo">Color</h3>

@@ -7,6 +7,7 @@
 const { Op } = require("sequelize");
 const db = require("../model/database/models");
 const slug = require("../helpers/slug");
+const { GRUPOS, OCASIONES, TEMPORADAS, FITS } = require("../data/clasificacion");
 
 const LARGO = { categoria: 60, subcategoria: 40 };
 
@@ -32,28 +33,47 @@ async function menu() {
 
 const limpiarMenu = () => (menuCache = null);
 
-// Las categorías de prendas superiores se agrupan en la pestaña "Ropa" del menú;
-// el resto (Pantalones, Vestidos, Accesorios, las que se agreguen) van sueltas.
-const GRUPO_ROPA = ["camperas", "remeras", "tops", "polleras", "shorts"];
-
-// Pestañas del menú: Inicio · Novedades · Ropa ▾ · <categorías> ▾ · Ofertas
+// Pestañas del menú, según la estructura de src/data/clasificacion.js:
+// Novedades · Prendas Superiores ▾ · Prendas Inferiores ▾ · Vestidos y Monos ▾ ·
+// Ropa Interior y de Dormir ▾ · Ocasión ▾ · Temporada ▾ · Talles y fit ▾ · Sale
 async function navegacion() {
   const categorias = await menu();
-  const ropa = categorias.filter((c) => GRUPO_ROPA.includes(c.slug));
-  const resto = categorias.filter((c) => !GRUPO_ROPA.includes(c.slug));
-  return [
-    { clave: "inicio", nombre: "Inicio", url: "/", hijos: [] },
-    { clave: "novedades", nombre: "Novedades", url: "/novedades", hijos: [] },
-    ...(ropa.length
-      ? [{ clave: "tienda", nombre: "Ropa", url: "/tienda", claves: ropa.map((c) => c.slug), hijos: [{ nombre: "Toda la colección", url: "/tienda" }, ...ropa.map((c) => ({ nombre: c.nombre, url: c.url }))] }]
-      : []),
-    ...resto.map((c) => ({
+  const usadas = new Set();
+  const grupos = GRUPOS.map((g) => {
+    const cats = g.slugs.map((s) => categorias.find((c) => c.slug === s)).filter(Boolean);
+    cats.forEach((c) => usadas.add(c.slug));
+    return {
+      clave: g.clave,
+      nombre: g.nombre,
+      url: cats[0]?.url || "/tienda",
+      claves: cats.map((c) => c.slug),
+      hijos: [{ nombre: `Todo en ${g.nombre}`, url: `/prendas/${g.clave}` }, ...cats.map((c) => ({ nombre: c.nombre, url: c.url }))],
+    };
+  }).filter((g) => g.claves.length);
+  // Categorías nuevas que no están en ningún grupo: pestañas sueltas
+  const sueltas = categorias
+    .filter((c) => !usadas.has(c.slug))
+    .map((c) => ({
       clave: c.slug,
       nombre: c.nombre,
       url: c.url,
       hijos: c.subcategorias.length ? [{ nombre: `Todo en ${c.nombre}`, url: c.url }, ...c.subcategorias.map((s) => ({ nombre: s.nombre, url: s.url }))] : [],
-    })),
-    { clave: "ofertas", nombre: "Ofertas", url: "/ofertas", hijos: [] },
+    }));
+
+  return [
+    { clave: "inicio", nombre: "Inicio", url: "/", hijos: [], soloMovil: true },
+    { clave: "novedades", nombre: "Novedades", url: "/novedades", hijos: [] },
+    ...grupos,
+    ...sueltas,
+    { clave: "ocasion", nombre: "Ocasión", url: "/ocasion/casual", hijos: OCASIONES.map((o) => ({ nombre: o.nombre, url: `/ocasion/${o.valor}` })) },
+    { clave: "temporada", nombre: "Temporada", url: "/temporada/primavera-verano", hijos: TEMPORADAS.map((t) => ({ nombre: t.nombre, url: `/temporada/${t.valor}` })) },
+    {
+      clave: "fit",
+      nombre: "Talles y fit",
+      url: "/guia-de-talles",
+      hijos: [{ nombre: "Guía de talles", url: "/guia-de-talles" }, ...FITS.map((f) => ({ nombre: f.nombre, url: `/fit/${f.valor}` }))],
+    },
+    { clave: "ofertas", nombre: "Sale", url: "/ofertas", hijos: [] },
   ];
 }
 

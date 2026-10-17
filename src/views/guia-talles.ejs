@@ -1,0 +1,56 @@
+<%- include('partials/head') %>
+<%- include('partials/header') %>
+
+  <section class="hero contenedor">
+    <nav class="migas" aria-label="Ruta">
+      <a href="/">Inicio</a>
+      <span>/</span>
+      <span aria-current="page">Guía de talles y fit</span>
+    </nav>
+    <h1 class="hero__titulo">Guía de talles y fit</h1>
+    <p class="hero__bajada">Encontrá tu calce ideal</p>
+    <span class="hero__linea" aria-hidden="true"></span>
+  </section>
+
+  <main class="guia contenedor">
+    <section class="guia__bloque">
+      <h2>Tabla de talles</h2>
+      <p>Medidas del cuerpo en centímetros. Si estás entre dos talles, te recomendamos elegir el más grande.</p>
+      <div class="guia__tabla">
+        <table>
+          <thead><tr><th>Talle</th><th>Busto</th><th>Cintura</th><th>Cadera</th></tr></thead>
+          <tbody>
+            <tr><td>XS</td><td>80–84</td><td>60–64</td><td>86–90</td></tr>
+            <tr><td>S</td><td>85–89</td><td>65–69</td><td>91–95</td></tr>
+            <tr><td>M</td><td>90–94</td><td>70–74</td><td>96–100</td></tr>
+            <tr><td>L</td><td>95–99</td><td>75–79</td><td>101–105</td></tr>
+            <tr><td>XL</td><td>100–104</td><td>80–84</td><td>106–110</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="guia__bloque">
+      <h2>Cómo tomarte las medidas</h2>
+      <ul class="guia__lista">
+        <li><strong>Busto:</strong> alrededor de la parte más ancha del pecho, con la cinta paralela al piso.</li>
+        <li><strong>Cintura:</strong> alrededor de la parte más angosta del torso, a la altura del ombligo.</li>
+        <li><strong>Cadera:</strong> alrededor de la parte más ancha de la cadera.</li>
+      </ul>
+    </section>
+
+    <section class="guia__bloque">
+      <h2>Qué es el fit</h2>
+      <p>El fit es el calce de la prenda: cómo cae sobre el cuerpo. Lo ves en cada producto y podés filtrar por él.</p>
+      <div class="guia__fits">
+        <a href="/fit/oversize" class="guia__fit"><h3>Oversize</h3><p>Holgado y amplio. Si querés el calce justo, elegí un talle menos.</p></a>
+        <a href="/fit/slim" class="guia__fit"><h3>Slim</h3><p>Ajustado al cuerpo. Si estás entre dos talles, elegí el más grande.</p></a>
+        <a href="/fit/recto" class="guia__fit"><h3>Recto</h3><p>Línea derecha, sin ajustar ni sobrar. Es tu talle de siempre.</p></a>
+        <a href="/fit/wide" class="guia__fit"><h3>Wide leg</h3><p>Pierna ancha desde la cadera. Largo y con mucha caída.</p></a>
+      </div>
+    </section>
+  </main>
+
+  <%- include('partials/footer') %>
+</body>
+</html>

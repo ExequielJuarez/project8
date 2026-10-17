@@ -42,6 +42,7 @@ No borran datos.
 | `007-subcategorias.sql` | Agrega `categorias.slug` (URLs `/categoria/blusas`), crea `subcategorias` y `productos.subcategoria_id`. La app también lo hace sola |
 | `008-arrepentimientos.sql` | Crea `arrepentimientos` (solicitudes del Botón de arrepentimiento). La app también la crea sola |
 | `009-talles.sql` | Agrega `productos.talles` y `pedido_items.talle` (talles de la ropa). La app también lo agrega sola |
+| `010-ocasion-temporada-fit.sql` | Agrega `productos.ocasiones`, `temporada` y `fit` (filtros Ocasión / Temporada / Fit del menú). La app también lo agrega sola |
 
 ## Tablas
 

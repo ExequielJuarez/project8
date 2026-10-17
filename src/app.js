@@ -52,6 +52,11 @@ app.locals.descuentoTransferencia = 0.1;
 app.locals.tienda = require("./helpers/tienda")();
 // Estado de un pedido explicado para el cliente (Mis pedidos)
 Object.assign(app.locals, require("./helpers/situacionPedido"));
+const clasificacion = require("./data/clasificacion");
+app.locals.OCASIONES = clasificacion.OCASIONES;
+app.locals.FITS = clasificacion.FITS;
+app.locals.TEMPORADAS = clasificacion.TEMPORADAS;
+app.locals.nombreDe = clasificacion.nombreDe;
 // Roles: esAdmin(usuario) / esSuperAdmin(usuario) en las vistas
 Object.assign(app.locals, require("./helpers/roles"));
 // Textos editables del inicio: *palabra* → cursiva (ya escapado)

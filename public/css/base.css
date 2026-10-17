@@ -630,12 +630,22 @@ ul {
 }
 
 .nav__chevron {
-  display: none;
+  transition: transform var(--transicion);
 }
 
+.sub-abierto > a .nav__chevron {
+  transform: rotate(180deg);
+}
+
+/* En el panel del celular el submenú se despliega al tocar la pestaña */
 .nav__sub {
+  display: none;
   padding: 4px 0 10px 14px;
   border-bottom: 1px solid var(--gris-200);
+}
+
+.sub-abierto > .nav__sub {
+  display: block;
 }
 
 .nav__sub a {
@@ -1671,8 +1681,9 @@ select.campo__control {
 
   .nav__lista {
     flex-direction: row;
+    flex-wrap: wrap;
     justify-content: center;
-    gap: clamp(28px, 5.4vw, 84px);
+    gap: 0 clamp(8px, 1.5vw, 26px);
   }
 
   .nav__item {
@@ -1683,10 +1694,11 @@ select.campo__control {
     position: relative;
     justify-content: flex-start;
     gap: 9px;
-    padding: 13px 14px;
+    padding: 13px 10px;
     border: 0;
     font-family: var(--fuente-texto);
-    font-size: 15px;
+    font-size: 14.5px;
+    white-space: nowrap;
     font-weight: 400;
   }
 
@@ -1712,9 +1724,8 @@ select.campo__control {
     color: var(--acento);
   }
 
-  .nav__chevron {
-    display: inline-block;
-    transition: transform var(--transicion);
+  .nav__item--solo-drawer {
+    display: none;
   }
 
   .nav__item:hover .nav__chevron,
@@ -1723,7 +1734,9 @@ select.campo__control {
   }
 
   /* Submenú desplegable */
-  .nav__sub {
+  .nav__sub,
+  .sub-abierto > .nav__sub {
+    display: block;
     position: absolute;
     top: 100%;
     left: 50%;

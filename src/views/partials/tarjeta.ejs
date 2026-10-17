@@ -5,6 +5,8 @@
          data-sub="<%= p.subcategoriaSlug || '' %>"
          data-colores="<%= (p.colores || []).map(c => c.valor).join(' ') %>"
          data-talles="<%= (p.talles || []).join(',') %>"
+         data-ocasiones="<%= (p.ocasiones || []).join(',') %>"
+         data-fit="<%= p.fit || '' %>"
          data-precio="<%= p.precio %>"
          data-orden="<%= typeof i !== 'undefined' ? i : 0 %>"<%= locals.oculta ? ' hidden' : '' %>>
   <div class="tarjeta__media">

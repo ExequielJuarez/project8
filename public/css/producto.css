@@ -992,3 +992,24 @@ body.con-barra .whatsapp {
   letter-spacing: 0.08em;
   text-transform: uppercase;
 }
+
+/* Fit y ocasiones del producto (links a los filtros) */
+.info__fit {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 14px;
+}
+
+.info__fit a {
+  padding: 5px 12px;
+  border: 1px solid var(--gris-200);
+  border-radius: 999px;
+  font-size: 12px;
+  transition: border-color var(--transicion), color var(--transicion);
+}
+
+.info__fit a:hover {
+  border-color: var(--acento);
+  color: var(--acento);
+}

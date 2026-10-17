@@ -11,6 +11,9 @@ module.exports = (sequelize, DataTypes) => {
       costo: { type: DataTypes.DECIMAL(12, 2), allowNull: false, defaultValue: 0, validate: { min: 0 } },
       stock: { type: DataTypes.INTEGER.UNSIGNED, allowNull: false, defaultValue: 0 },
       talles: DataTypes.STRING(60), // "XS,S,M"; vacío = producto sin talle
+      ocasiones: DataTypes.STRING(80), // "casual,oficina"
+      temporada: DataTypes.STRING(30),
+      fit: DataTypes.STRING(20),
       etiqueta: DataTypes.STRING(24),
       resumen: DataTypes.STRING(255),
       descripcion: DataTypes.TEXT, // párrafos separados por una línea en blanco

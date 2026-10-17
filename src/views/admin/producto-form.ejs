@@ -108,6 +108,33 @@
                   <% }) %>
                 </div>
               </fieldset>
+              <fieldset class="campo campo--completo talles-admin" id="ocasiones">
+                <legend class="campo__label">Ocasión <span class="campo__opcional">(opcional)</span></legend>
+                <p class="colores-admin__ayuda">Para qué se usa la prenda: aparece en el menú Ocasión y como filtro.</p>
+                <div class="talles-admin__lista">
+                  <% const ocasionesElegidas = [].concat(d.ocasiones || []).join(',').split(','); %>
+                  <% OCASIONES.forEach(o => { %>
+                    <label class="talle-opcion">
+                      <input type="checkbox" name="ocasiones" value="<%= o.valor %>" <%= ocasionesElegidas.includes(o.valor) ? 'checked' : '' %>>
+                      <span><%= o.nombre %></span>
+                    </label>
+                  <% }) %>
+                </div>
+              </fieldset>
+              <div class="campo">
+                <label class="campo__label" for="temporada">Temporada <span class="campo__opcional">(opcional)</span></label>
+                <select class="campo__control" id="temporada" name="temporada">
+                  <option value="">Todo el año</option>
+                  <% TEMPORADAS.forEach(t => { %><option value="<%= t.valor %>" <%= d.temporada === t.valor ? 'selected' : '' %>><%= t.nombre %></option><% }) %>
+                </select>
+              </div>
+              <div class="campo">
+                <label class="campo__label" for="fit">Fit / calce <span class="campo__opcional">(opcional)</span></label>
+                <select class="campo__control" id="fit" name="fit">
+                  <option value="">Sin especificar</option>
+                  <% FITS.forEach(f => { %><option value="<%= f.valor %>" <%= d.fit === f.valor ? 'selected' : '' %>><%= f.nombre %></option><% }) %>
+                </select>
+              </div>
               <%- include('../partials/campo', { nombre: 'etiqueta', etiqueta: 'Etiqueta destacada', opcional: true, clase: 'campo--completo', placeholder: 'Ej: Nuevo, Oferta, Más elegido', attrs: 'maxlength="24"' }) %>
             </div>
           </section>
