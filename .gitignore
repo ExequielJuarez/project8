@@ -5,5 +5,4 @@ pnpm-lock.yaml
 
 
 .env
-public/img/productos/producto-*
-public/img/inicio/subidas/*
+
