@@ -106,7 +106,7 @@ module.exports = {
   // Crea el pedido (descuenta el stock y vacía el carrito) y lo manda a pagar:
   // con tarjeta → Mercado Pago; con transferencia → página con los datos
   async confirmar(req, res) {
-    if (["tarjeta", "transferencia"].includes(req.body.medio)) carrito.fijarMedioPago(req.session, req.body.medio);
+    if (["tarjeta", "transferencia"].includes(req.body?.medio)) carrito.fijarMedioPago(req.session, req.body.medio);
     if (pagos.modo() === "desactivado") carrito.fijarMedioPago(req.session, "transferencia");
     const resumen = await carrito.resumen(req.session);
     const datos = req.session.checkout?.datos;

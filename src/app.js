@@ -27,6 +27,12 @@ app.get("/favicon.ico", (req, res) => res.redirect(301, "/img/favicon.svg"));
 // Tamaños máximos: un pedido gigante no puede tumbar el servidor
 app.use(express.urlencoded({ extended: false, limit: "100kb", parameterLimit: 300 }));
 app.use(express.json({ limit: "100kb" }));
+// body-parser no toca req.body si el pedido no trae el Content-Type esperado o no manda body:
+// sin esto, cada controlador que lee req.body.algo revienta con un pedido vacío o mal formado.
+app.use((req, res, next) => {
+  req.body = req.body || {};
+  next();
+});
 app.use(methodOverride("_method"));
 
 app.set("view engine", "ejs");
