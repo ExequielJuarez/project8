@@ -98,7 +98,7 @@
           </table>
         </div>
 
-        <script type="application/json" id="datosGrafico"><%- JSON.stringify(serieJSON) %></script>
+        <script type="application/json" id="datosGrafico"><%- JSON.stringify(serieJSON).replace(/</g, "\\u003c").replace(/\u2028|\u2029/g, "") %></script>
       </section>
 
       <div class="dashboard__fila">

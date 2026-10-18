@@ -5,6 +5,9 @@ const methodOverride = require("method-override");
 const session = require("express-session");
 
 const app = express();
+const seguridad = require("./middlewares/seguridad");
+// No avisar qué tecnología usa el sitio
+app.disable("x-powered-by");
 
 const indexRouter = require("./routes/index.Routes");
 const adminRouter = require("./routes/admin.Routes");
@@ -16,11 +19,14 @@ const categoriaService = require("./services/categoriaService");
 // Render (y otros hostings) indican el puerto en PORT
 const puerto = Number(process.env.PORT) || 3000;
 
-app.use(express.static(path.join(__dirname, "../public")));
+app.use(seguridad.cabeceras);
+app.use(express.static(path.join(__dirname, "../public"), { dotfiles: "ignore" }));
+app.use(seguridad.general);
 // Navegadores que piden /favicon.ico igual reciben el ícono
 app.get("/favicon.ico", (req, res) => res.redirect(301, "/img/favicon.svg"));
-app.use(express.urlencoded({ extended: false }));
-app.use(express.json());
+// Tamaños máximos: un pedido gigante no puede tumbar el servidor
+app.use(express.urlencoded({ extended: false, limit: "100kb", parameterLimit: 300 }));
+app.use(express.json({ limit: "100kb" }));
 app.use(methodOverride("_method"));
 
 app.set("view engine", "ejs");
@@ -29,8 +35,10 @@ app.set("views", path.join(__dirname, "views"));
 // Detrás del proxy https de Render: necesario para que la cookie segura funcione
 app.set("trust proxy", 1);
 
-if (!process.env.SESSION_SECRET && process.env.NODE_ENV === "production") {
-  console.warn("⚠️  Falta SESSION_SECRET en las variables de entorno: usá una clave larga y secreta.");
+// En producción la clave de la sesión es obligatoria: sin ella cualquiera podría falsificar sesiones
+if (process.env.NODE_ENV === "production" && (process.env.SESSION_SECRET || "").length < 32) {
+  console.error("❌ Falta SESSION_SECRET (o es muy corta): usá una frase aleatoria de 32 caracteres o más.");
+  process.exit(1);
 }
 
 app.use(
@@ -42,6 +50,8 @@ app.use(
     cookie: { secure: "auto", httpOnly: true, sameSite: "lax" },
   }),
 );
+// Anti-CSRF: los pedidos que modifican datos tienen que salir de este mismo sitio
+app.use(seguridad.mismoOrigen);
 
 // Helpers disponibles en todas las vistas
 // $ 28.900 (con centavos solo si los tiene: $ 26.010,50)

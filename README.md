@@ -18,7 +18,7 @@ npm run dev                 # http://localhost:3000
 Usuarios de prueba: `demo@tienda.com / Demo1234` (cliente), `admin@tienda.com / Admin1234`
 (admin) y `super@tienda.com / Super1234` (superadmin, edita el inicio).
 
-Más detalles: [database/README.md](database/README.md), [PAGOS.md](PAGOS.md),
+Más detalles: [SEGURIDAD.md](SEGURIDAD.md), [database/README.md](database/README.md), [PAGOS.md](PAGOS.md),
 [ACCESO.md](ACCESO.md), [LEGALES.md](LEGALES.md), [DEPLOY.md](DEPLOY.md) y [DONWEB.md](DONWEB.md).
 
 ## Fotos

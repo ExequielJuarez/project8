@@ -18,6 +18,7 @@ const soloLogueados = require("../middlewares/soloLogueados");
 const legal = require("../controllers/legalController");
 const perfilValidator = require("../validations/perfilValidator");
 const claveValidator = require("../validations/claveValidator");
+const seguridad = require("../middlewares/seguridad");
 const { GRUPOS, OCASIONES, TEMPORADAS, FITS, nombreDe } = require("../data/clasificacion");
 
 // ── INICIO ─────────────────────────────────────────────────
@@ -247,6 +248,7 @@ router.get("/buscar/sugerencias", async (req, res) => {
 
 // ── DETALLE DE PRODUCTO ────────────────────────────────────
 router.get("/producto/:id", async (req, res) => {
+  if (!/^\d{1,9}$/.test(req.params.id)) return res.status(404).redirect("/tienda"); // el código es solo números
   const producto = await productoService.obtener(req.params.id);
   if (!producto) return res.redirect("/tienda");
 
@@ -270,7 +272,7 @@ router.post("/carrito/agregar", carritoController.agregar);
 router.patch("/carrito/item/:clave", carritoController.actualizar);
 router.delete("/carrito/item/:clave", carritoController.quitar);
 router.delete("/carrito", carritoController.vaciar);
-router.post("/carrito/cupon", carritoController.cupon);
+router.post("/carrito/cupon", seguridad.cupones, carritoController.cupon);
 router.delete("/carrito/cupon", carritoController.quitarCupon);
 router.post("/carrito/medio-pago", carritoController.medioPago);
 router.post("/carrito/envio", carritoController.envio);
@@ -311,21 +313,21 @@ router.get("/cookies", legal.pagina("cookies"));
 router.get("/cambios-y-devoluciones", legal.pagina("cambios"));
 // Botón de arrepentimiento (Res. 424/2020): sin necesidad de iniciar sesión
 router.get("/arrepentimiento", legal.verArrepentimiento);
-router.post("/arrepentimiento", legal.enviarArrepentimiento);
+router.post("/arrepentimiento", seguridad.formularios, legal.enviarArrepentimiento);
 
 // ── USUARIOS ───────────────────────────────────────────────
 router.get("/login", soloInvitados, usuarioController.verLogin);
-router.post("/login", soloInvitados, loginValidator, usuarioController.login);
+router.post("/login", seguridad.acceso, seguridad.porCuenta, soloInvitados, loginValidator, usuarioController.login);
 router.post("/logout", usuarioController.logout);
 router.get("/registro", soloInvitados, usuarioController.verRegistro);
-router.post("/registro", soloInvitados, registroValidator, usuarioController.registrar);
+router.post("/registro", seguridad.acceso, soloInvitados, registroValidator, usuarioController.registrar);
 
 // Código por email: entrar sin contraseña, recuperar la cuenta y confirmar el registro
 router.get("/login/codigo", soloInvitados, usuarioController.verPedirCodigo);
-router.post("/login/codigo", soloInvitados, usuarioController.pedirCodigo);
+router.post("/login/codigo", seguridad.acceso, soloInvitados, usuarioController.pedirCodigo);
 router.get("/verificar", soloInvitados, usuarioController.verVerificar);
-router.post("/verificar", soloInvitados, usuarioController.confirmarCodigo);
-router.post("/verificar/reenviar", soloInvitados, usuarioController.reenviarCodigo);
+router.post("/verificar", seguridad.acceso, soloInvitados, usuarioController.confirmarCodigo);
+router.post("/verificar/reenviar", seguridad.acceso, soloInvitados, usuarioController.reenviarCodigo);
 
 // Google (real si está configurado en .env, demo si no)
 router.get("/auth/google", soloInvitados, usuarioController.googleInicio);

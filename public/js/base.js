@@ -67,6 +67,9 @@
     { passive: true }
   );
 
+  // Botones "Imprimir" (sin JavaScript en línea: la política de seguridad no lo permite)
+  $$("[data-imprimir]").forEach((b) => b.addEventListener("click", () => window.print()));
+
   // ---------- Acordeones ----------
   $$(".acordeon__titulo").forEach((btn) => {
     btn.addEventListener("click", () => {
